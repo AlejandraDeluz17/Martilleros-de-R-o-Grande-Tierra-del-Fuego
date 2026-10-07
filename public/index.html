@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Colegio de Martilleros de Tierra del Fuego</title>
+  <meta name="description" content="Sitio oficial del Colegio de Martilleros y Corredores Públicos de Tierra del Fuego: padrón de matriculados, normativa, novedades y portal de autogestión.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="marca" href="#inicio"><span class="sello">CM</span><span>Colegio de Martilleros<small>Tierra del Fuego</small></span></a>
+      <nav class="menu">
+        <a href="#institucional">Institucional</a>
+        <a href="#padron">Padrón</a>
+        <a href="#novedades">Novedades</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#registro">Registrarse</a>
+        <a class="cta" href="/portal.html">Portal matriculados</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <h1>Colegio de Martilleros y Corredores Públicos de Tierra del Fuego</h1>
+      <p>Información institucional, verificación pública de matrículas y servicios en línea para los profesionales de Río Grande, Ushuaia y Tolhuin.</p>
+      <div class="acciones">
+        <a class="btn dorado" href="#padron">Verificar un martillero</a>
+        <a class="btn claro" href="/portal.html">Ingresar al portal</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque" id="institucional">
+    <div class="wrap">
+      <h2>Información institucional</h2>
+      <p class="sub">Autoridades, leyes provinciales, decretos, código de ética y resoluciones vigentes.</p>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start;">
+        <div class="card">
+          <h3>Autoridades</h3>
+          <div id="autoridades" class="muted">Cargando…</div>
+        </div>
+        <div class="card">
+          <h3>Normativas</h3>
+          <div class="tabs" id="tabs-norma"></div>
+          <ul class="lista-norma" id="normativas"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque" id="padron">
+    <div class="wrap">
+      <h2>Padrón de matriculados</h2>
+      <p class="sub">Verificá si un martillero o corredor está matriculado y habilitado para ejercer en la provincia.</p>
+      <div class="buscador">
+        <input id="q" type="search" placeholder="Buscar por apellido, nombre, N.º de matrícula o DNI" autocomplete="off">
+        <select id="loc">
+          <option value="">Todas las localidades</option>
+          <option>Río Grande</option><option>Ushuaia</option><option>Tolhuin</option>
+        </select>
+      </div>
+      <div class="tabla-wrap">
+        <table>
+          <thead><tr><th>Matrícula</th><th>Apellido y nombre</th><th>Localidad</th><th>Estado</th><th>Habilitación</th></tr></thead>
+          <tbody id="padron-body"><tr><td colspan="5" class="muted">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="muted">La información del padrón se actualiza en tiempo real desde los registros del Colegio.</p>
+    </div>
+  </section>
+
+  <section class="bloque" id="novedades">
+    <div class="wrap">
+      <h2>Novedades y circulares</h2>
+      <p class="sub">Comunicados de la Comisión Directiva, llamados a asamblea y novedades legales.</p>
+      <div class="grid" id="lista-novedades"></div>
+    </div>
+  </section>
+
+  <section class="bloque" id="contacto">
+    <div class="wrap">
+      <h2>Contacto y sedes</h2>
+      <p class="sub">Ubicación, horarios de atención y canales oficiales.</p>
+      <div class="grid" id="sedes"></div>
+    </div>
+  </section>
+
+  <section class="bloque" id="registro">
+    <div class="wrap" style="max-width: 720px;">
+      <h2>Registrate</h2>
+      <p class="sub">Dejá tus datos para recibir información y novedades del Colegio.</p>
+      <form id="form-registro" class="card" novalidate>
+        <div class="fila">
+          <div><label for="r-nombre">Nombre</label><input id="r-nombre" name="nombre" required maxlength="80" autocomplete="given-name"></div>
+          <div><label for="r-apellido">Apellido</label><input id="r-apellido" name="apellido" required maxlength="80" autocomplete="family-name"></div>
+        </div>
+        <div class="fila">
+          <div><label for="r-email">Email</label><input id="r-email" name="email" type="email" required maxlength="120" autocomplete="email"></div>
+        </div>
+        <button class="btn" type="submit">Registrarme</button>
+        <div id="registro-msg" class="oculto"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <strong>Colegio de Martilleros y Corredores Públicos de Tierra del Fuego</strong><br>
+      Río Grande · Ushuaia · Tolhuin — <a href="/portal.html">Portal de matriculados</a> · <a href="/admin.html">Administración</a>
+    </div>
+  </footer>
+
+  <script src="/comun.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
