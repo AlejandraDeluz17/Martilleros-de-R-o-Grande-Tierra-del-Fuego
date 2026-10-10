@@ -158,7 +158,7 @@ ${o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld).repl
       <a class="btn btn-contorno-claro" href="/contacto">Contacto</a>
     </div>
     <a class="cabecera-rapido" href="/matriculados#padron">${icono('buscar', 20)}<span class="sr">Consultar matrícula</span></a>
-    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu-principal">${icono('menu', 20)}<span class="menu-btn-txt">Menú</span></button>
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu-principal"><span class="ico-abrir">${icono('menu', 20)}</span><span class="ico-cerrar">${icono('cerrar', 20)}</span><span class="menu-btn-txt">Menú</span></button>
   </div>
   <nav class="nav" id="menu-principal" aria-label="Principal">
     <div class="contenedor">

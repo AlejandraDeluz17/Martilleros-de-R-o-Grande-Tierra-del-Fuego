@@ -62,7 +62,7 @@ const LARGA: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year:
 export const fecha = (d: unknown, opts: Intl.DateTimeFormatOptions = LARGA) =>
   d ? new Date(d as string).toLocaleDateString('es-AR', { timeZone: TZ, ...opts }) : '';
 export const fechaHora = (d: unknown) =>
-  d ? new Date(d as string).toLocaleString('es-AR', { timeZone: TZ, ...LARGA, hour: '2-digit', minute: '2-digit' }) + ' h' : '';
+  d ? `${fecha(d)}, ${new Date(d as string).toLocaleTimeString('es-AR', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })} h` : '';
 // Para columnas DATE (sin zona horaria)
 export const fechaDia = (d: unknown) => (d ? new Date(d as string).toLocaleDateString('es-AR', { timeZone: 'UTC', ...LARGA }) : '');
 export const iso = (d: unknown) => (d ? new Date(d as string).toISOString() : '');

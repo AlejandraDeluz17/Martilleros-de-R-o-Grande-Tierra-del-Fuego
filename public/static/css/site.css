@@ -164,12 +164,12 @@ main:focus { outline: none; }
 @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; padding-top: 52px; padding-bottom: 60px; } }
 
 /* ------------------------------ Secciones ------------------------------ */
-.seccion { padding: 76px 0; }
+.seccion { padding-top: 76px; padding-bottom: 76px; }
 .seccion-alt { background: var(--papel); }
 .seccion-gris { background: var(--gris); }
 .seccion-azul { background: var(--azul); color: #DCE4EB; }
 .seccion-azul h2, .seccion-azul h3 { color: #fff; }
-@media (max-width: 640px) { .seccion { padding: 52px 0; } }
+@media (max-width: 640px) { .seccion { padding-top: 52px; padding-bottom: 52px; } }
 .titulo-seccion { margin-bottom: 34px; max-width: 760px; }
 .titulo-seccion h2 { position: relative; padding-bottom: 16px; margin: 0; }
 .titulo-seccion h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 52px; height: 3px; background: var(--dorado); border-radius: 2px; }
@@ -403,3 +403,5 @@ tbody tr:last-child td { border-bottom: 0; }
 .grupo-contenidos { margin-bottom: 30px; }
 .grupo-contenidos h2 { font-size: 1.15rem; border-bottom: 1px solid var(--linea); padding-bottom: 8px; }
 .barra-guardar { position: sticky; bottom: 0; background: var(--blanco); padding: 14px 0; border-top: 1px solid var(--linea); display: flex; gap: 12px; align-items: center; }
+.menu-btn .ico-abrir, .menu-btn .ico-cerrar { display: inline-flex; }
+.menu-btn[aria-expanded=true] .ico-abrir, .menu-btn[aria-expanded=false] .ico-cerrar { display: none; }
