@@ -1,0 +1,13 @@
+{
+  "name": "colegio-martilleros-rio-grande",
+  "private": true,
+  "description": "Sitio institucional de la Departamental Río Grande del Colegio de Martilleros y Corredores Públicos de Tierra del Fuego",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/server.ts"
+  },
+  "dependencies": {
+    "hono": "^4.6.0",
+    "pdfkit": "^0.15.0"
+  }
+}
