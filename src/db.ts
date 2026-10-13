@@ -130,6 +130,11 @@ export async function migrar() {
       'Año 2007. Regula el ejercicio profesional de martilleros y corredores públicos en Tierra del Fuego, Antártida e Islas del Atlántico Sur y crea el Colegio. Texto publicado por la Legislatura provincial.',
       $1, 0
     WHERE NOT EXISTS (SELECT 1 FROM normativas WHERE titulo ILIKE '%762%')`, [LEY_762_URL]);
+  await q(`INSERT INTO normativas (categoria, titulo, descripcion, url, orden)
+    SELECT 'ley', 'Ley Nacional 20.266 — Martilleros y Corredores', 'Año 1973.', $1, 1
+    WHERE NOT EXISTS (SELECT 1 FROM normativas WHERE titulo ILIKE 'Ley Nacional 20.266%')`, [LEY_20266_URL]);
+  await q(`UPDATE normativas SET descripcion = 'Año 1973. Régimen nacional de martilleros y corredores, con las modificaciones introducidas por la Ley 25.028 (1999). Texto actualizado en el sitio oficial de normativa nacional.'
+    WHERE titulo ILIKE 'Ley Nacional 20.266%' AND descripcion = 'Año 1973.'`);
   await q(`UPDATE normativas SET url = $1,
       descripcion = 'Año 1973. Régimen nacional de martilleros y corredores, con las modificaciones introducidas por la Ley 25.028 (1999). Texto actualizado en el sitio oficial de normativa nacional.'
     WHERE titulo ILIKE 'Ley Nacional 20.266%' AND url IS NULL`, [LEY_20266_URL]);

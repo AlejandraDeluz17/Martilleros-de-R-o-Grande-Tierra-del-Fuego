@@ -122,10 +122,10 @@
       return `<tr><td><strong>${esc(m.matricula)}</strong></td><td>${esc(m.apellido)}, ${esc(m.nombre)}</td><td>${esc(m.titulo_txt || '—')}</td><td>${situacion}</td></tr>`;
     };
 
-    async function buscar() {
+    async function buscar(inicial = false) {
       const p = new URLSearchParams();
       ['q', 'titulo', 'estado'].forEach((k) => { const v = fp.elements[k].value.trim(); if (v) p.set(k, v); });
-      history.replaceState(null, '', `${location.pathname}${p.toString() ? `?${p}` : ''}#padron`);
+      if (!inicial) history.replaceState(null, '', `${location.pathname}${p.toString() ? `?${p}` : ''}#padron`);
       const actual = ++pedido;
       info.textContent = 'Buscando…';
       try {
@@ -143,7 +143,7 @@
     }
     fp.addEventListener('submit', (e) => { e.preventDefault(); clearTimeout(espera); buscar(); });
     fp.addEventListener('input', () => { clearTimeout(espera); espera = setTimeout(buscar, 300); });
-    buscar();
+    buscar(true);
   }
 
   /* ---------------------------- Normativa: filtros ---------------------------- */
