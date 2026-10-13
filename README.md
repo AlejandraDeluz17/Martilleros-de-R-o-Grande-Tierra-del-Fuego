@@ -19,12 +19,12 @@ En producción: https://martilleros-rio-grande.up.railway.app
 | `/cofeci` | Presentación del Consejo Federal de Colegios Inmobiliarios y su sitio oficial |
 | `/contacto` | Datos confirmados y formulario de consultas (se guardan en la base) |
 | `/denuncias` | Consultas y denuncias: derivación al formulario de contacto o al formulario oficial de denuncias |
+| `/portal` | Portal de autogestión para matriculados |
+| `/admin` | Administración de contenidos |
 
 La suscripción a novedades (nombre, apellido y correo) está en el pie de todas las páginas.
 
 La foto de portada por defecto es una vista aérea de una avenida de Río Grande (`public/static/img/portada-avenida.jpg`), ampliada 2× con interpolación bicúbica y enfoque suave a partir de un original de 678 × 362 px. Para reemplazarla por una foto oficial en mejor resolución, usá Administración → Contenidos → Imágenes; el crédito se completa en el mismo lugar o en `FOTO_PORTADA.credito` (`src/util.ts`).
-| `/portal` | Portal de autogestión para matriculados |
-| `/admin` | Administración de contenidos |
 
 Todo el contenido institucional (textos, contacto, logo, foto de portada, autoridades, novedades y documentos) se carga desde `/admin`, sin tocar el código. Si un dato no está cargado, el sitio muestra "Información pendiente de confirmación" en lugar de inventarlo.
 
