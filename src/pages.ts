@@ -111,8 +111,10 @@ sitio.get('/', async (c) => {
       </div>
     </div>
     <figure class="portada-figura">
-      <div class="portada-marco">${foto}</div>
-      <div class="portada-sello" aria-hidden="true"><span class="sello-num">762</span><span class="sello-txt">Ley Provincial<br>de creación del Colegio</span></div>
+      <div class="portada-foto">
+        <div class="portada-marco">${foto}</div>
+        <div class="portada-sello" aria-hidden="true"><span class="sello-num">762</span><span class="sello-txt">Ley Provincial<br>de creación del Colegio</span></div>
+      </div>
       ${credito ? `<figcaption class="portada-credito">${credito}</figcaption>` : ''}
     </figure>
   </div>
