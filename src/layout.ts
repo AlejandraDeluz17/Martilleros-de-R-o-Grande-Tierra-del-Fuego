@@ -147,7 +147,7 @@ export function pagina(o: Pagina) {
   const titulo = o.ruta === '/' ? `${DEPARTAMENTAL} — Colegio de Martilleros y Corredores Públicos de Tierra del Fuego` : `${o.titulo} — ${DEPARTAMENTAL} · Colegio de Martilleros TDF`;
   const desc = o.descripcion ?? `Sitio institucional de la ${DEPARTAMENTAL} del Colegio de Martilleros y Corredores Públicos de Tierra del Fuego: consulta de matrícula, trámites, normativa, novedades y capacitaciones.`;
   const canon = o.base + o.ruta;
-  const imagen = o.imagen ?? (o.cfg.portada_id ? `${o.base}/archivos/${o.cfg.portada_id}` : `${o.base}/static/img/portada-avenida.jpg`);
+  const imagen = o.imagen ?? (o.cfg.portada_id ? `${o.base}/archivos/${o.cfg.portada_id}` : `${o.base}/static/img/portada-avenida.jpg?v=${ENV.VERSION}`);
   return `<!doctype html>
 <html lang="es-AR">
 <head>

@@ -21,8 +21,8 @@ export const CCYCN_URL = 'https://www.argentina.gob.ar/normativa/nacional/ley-26
 
 // Foto de portada por defecto (licencia libre; se reemplaza desde Administración → Contenidos → Imágenes)
 export const FOTO_PORTADA = {
-  src: '/static/img/portada-avenida.jpg',          // 2000 × 848, original sin recomprimir
-  srcChica: '/static/img/portada-avenida-chica.jpg', // 1000 × 424, para celulares
+  src: `/static/img/portada-avenida.jpg?v=${ENV.VERSION}`,          // 2000 × 848, original sin recomprimir
+  srcChica: `/static/img/portada-avenida-chica.jpg?v=${ENV.VERSION}`, // 1000 × 424, para celulares
   ancho: 2000,
   alto: 848,
   alt: 'Vista elevada de una avenida de Río Grande, con su cantero central arbolado, luminarias y edificios a ambos lados',
