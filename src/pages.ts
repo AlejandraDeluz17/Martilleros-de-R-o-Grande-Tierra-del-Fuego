@@ -93,7 +93,7 @@ sitio.get('/', async (c) => {
 
   const foto = cfg.portada_id
     ? `<img src="/archivos/${esc(cfg.portada_id)}" alt="${esc(cfg.portada_alt || 'Vista de Río Grande, Tierra del Fuego')}" width="1600" height="900" fetchpriority="high">`
-    : `<img src="${FOTO_PORTADA.srcChica}" srcset="${FOTO_PORTADA.srcChica} 678w, ${FOTO_PORTADA.src} 1356w" sizes="100vw" alt="${esc(FOTO_PORTADA.alt)}" width="${FOTO_PORTADA.ancho}" height="${FOTO_PORTADA.alto}" fetchpriority="high">`;
+    : `<img src="${FOTO_PORTADA.srcChica}" srcset="${FOTO_PORTADA.srcChica} 1000w, ${FOTO_PORTADA.src} 2000w" sizes="100vw" alt="${esc(FOTO_PORTADA.alt)}" width="${FOTO_PORTADA.ancho}" height="${FOTO_PORTADA.alto}" fetchpriority="high">`;
   const creditoTexto = cfg.portada_id ? cfg.portada_credito : FOTO_PORTADA.credito;
 
   // A + B · Presentación institucional y fotografía a todo el ancho
