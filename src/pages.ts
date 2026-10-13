@@ -93,10 +93,9 @@ sitio.get('/', async (c) => {
 
   const foto = cfg.portada_id
     ? `<img src="/archivos/${esc(cfg.portada_id)}" alt="${esc(cfg.portada_alt || 'Paisaje de Río Grande, Tierra del Fuego')}" width="1600" height="1000" fetchpriority="high">`
-    : `<img src="${FOTO_PORTADA.srcChica}" srcset="${FOTO_PORTADA.srcChica} 960w, ${FOTO_PORTADA.src} 1920w" sizes="(max-width: 960px) 100vw, 50vw" alt="${esc(FOTO_PORTADA.alt)}" width="1920" height="1280" fetchpriority="high">`;
-  const credito = cfg.portada_id
-    ? (cfg.portada_credito ? `Foto: ${esc(cfg.portada_credito)}` : '')
-    : `Foto: Costanera de Río Grande · ${FOTO_PORTADA.autor} · <a href="${FOTO_PORTADA.licenciaUrl}" target="_blank" rel="noopener license">${FOTO_PORTADA.licencia}</a> · <a href="${FOTO_PORTADA.fuente}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
+    : `<img src="${FOTO_PORTADA.srcChica}" srcset="${FOTO_PORTADA.srcChica} 678w, ${FOTO_PORTADA.src} 1356w" sizes="(max-width: 960px) 100vw, 46vw" alt="${esc(FOTO_PORTADA.alt)}" width="${FOTO_PORTADA.ancho}" height="${FOTO_PORTADA.alto}" fetchpriority="high">`;
+  const creditoTexto = cfg.portada_id ? cfg.portada_credito : FOTO_PORTADA.credito;
+  const credito = creditoTexto ? `Foto: ${esc(creditoTexto)}` : '';
 
   // A + B · Portada principal
   const portada = `<section class="portada" aria-labelledby="portada-titulo">

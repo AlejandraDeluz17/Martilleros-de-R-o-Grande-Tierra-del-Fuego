@@ -22,7 +22,7 @@ En producción: https://martilleros-rio-grande.up.railway.app
 
 La suscripción a novedades (nombre, apellido y correo) está en el pie de todas las páginas.
 
-La foto de portada por defecto es "Costanera de Río Grande" de Soyyosoycocomiel ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=63094400)); se reemplaza desde Administración → Contenidos → Imágenes.
+La foto de portada por defecto es una vista aérea de una avenida de Río Grande (`public/static/img/portada-avenida.jpg`), ampliada 2× con interpolación bicúbica y enfoque suave a partir de un original de 678 × 362 px. Para reemplazarla por una foto oficial en mejor resolución, usá Administración → Contenidos → Imágenes; el crédito se completa en el mismo lugar o en `FOTO_PORTADA.credito` (`src/util.ts`).
 | `/portal` | Portal de autogestión para matriculados |
 | `/admin` | Administración de contenidos |
 

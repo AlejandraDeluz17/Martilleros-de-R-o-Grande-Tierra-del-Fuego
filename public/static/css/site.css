@@ -171,11 +171,11 @@ h2.antetitulo, h3.antetitulo { letter-spacing: .18em; }
 .portada-bajada { font-size: 1.15rem; line-height: 1.65; color: var(--texto-suave); max-width: 52ch; padding-left: 20px; border-left: 2px solid var(--arena); }
 .portada-botones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
 .portada-figura { position: relative; margin: 0; }
-.portada-marco { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 200px 200px var(--radio) var(--radio); background: var(--petroleo); box-shadow: 0 30px 60px rgba(15, 44, 52, .18); }
-.portada-marco img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 48%; }
+.portada-marco { position: relative; aspect-ratio: 5 / 4; overflow: hidden; border-radius: 180px 180px var(--radio) var(--radio); background: var(--petroleo); box-shadow: 0 30px 60px rgba(15, 44, 52, .18); }
+.portada-marco img { width: 100%; height: 100%; object-fit: cover; object-position: 54% 50%; }
 .portada-marco::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(22, 60, 70, 0) 55%, rgba(22, 60, 70, .45) 100%); pointer-events: none; }
 .portada-foto { position: relative; }
-.portada-foto::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid var(--arena); border-radius: 200px 200px var(--radio) var(--radio); z-index: -1; }
+.portada-foto::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid var(--arena); border-radius: 180px 180px var(--radio) var(--radio); z-index: -1; }
 .portada-sello { position: absolute; left: -36px; bottom: 56px; display: flex; align-items: center; gap: 14px; background: var(--marfil); padding: 14px 20px 14px 16px; border-left: 3px solid var(--arena); box-shadow: 0 14px 30px rgba(15, 44, 52, .14); max-width: 260px; }
 .sello-num { font: 800 2rem/1 var(--f-titulo); color: var(--petroleo); letter-spacing: -.03em; }
 .sello-txt { font-size: .78rem; line-height: 1.35; color: var(--texto-suave); }
@@ -186,14 +186,14 @@ h2.antetitulo, h3.antetitulo { letter-spacing: .18em; }
   .portada::before { width: 100%; top: auto; height: 34%; }
   .portada-grid { grid-template-columns: 1fr; gap: 48px; }
   .portada-marco, .portada-foto::before { border-radius: 140px 140px var(--radio) var(--radio); }
-  .portada-marco { aspect-ratio: 5 / 4; }
-  .portada-marco img { object-position: 30% 35%; }
+  .portada-marco { aspect-ratio: 16 / 10; }
+  .portada-marco img { object-position: 52% 50%; }
   .portada-sello { left: 16px; bottom: 44px; }
 }
 @media (max-width: 520px) {
   .portada-marco, .portada-foto::before { border-radius: 90px 90px var(--radio) var(--radio); }
   .portada-foto::before { inset: 12px -10px -12px 10px; }
-  .portada-marco { aspect-ratio: 1 / 1; }
+  .portada-marco { aspect-ratio: 4 / 3; }
   .portada-sello { left: 10px; right: 10px; bottom: 38px; max-width: none; }
   .portada-bajada { font-size: 1.05rem; }
 }
