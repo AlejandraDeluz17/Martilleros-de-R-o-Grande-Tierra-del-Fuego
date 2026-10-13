@@ -176,10 +176,10 @@ h2.antetitulo, h3.antetitulo { letter-spacing: .18em; }
 .portada-marco::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(22, 60, 70, 0) 55%, rgba(22, 60, 70, .45) 100%); pointer-events: none; }
 .portada-foto { position: relative; }
 .portada-foto::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid var(--arena); border-radius: 180px 180px var(--radio) var(--radio); z-index: -1; }
-.portada-sello { position: absolute; left: -36px; bottom: 56px; display: flex; align-items: center; gap: 14px; background: var(--marfil); padding: 14px 20px 14px 16px; border-left: 3px solid var(--arena); box-shadow: 0 14px 30px rgba(15, 44, 52, .14); max-width: 260px; }
+.portada-sello { position: absolute; left: -36px; bottom: -30px; display: flex; align-items: center; gap: 14px; background: var(--marfil); padding: 14px 20px 14px 16px; border-left: 3px solid var(--arena); box-shadow: 0 14px 30px rgba(15, 44, 52, .14); max-width: 260px; }
 .sello-num { font: 800 2rem/1 var(--f-titulo); color: var(--petroleo); letter-spacing: -.03em; }
 .sello-txt { font-size: .78rem; line-height: 1.35; color: var(--texto-suave); }
-.portada-credito { margin-top: 30px; font-size: .72rem; color: var(--texto-suave); text-align: right; }
+.portada-credito { margin-top: 48px; font-size: .72rem; color: var(--texto-suave); text-align: right; }
 .portada-credito a { color: var(--texto-suave); }
 @media (max-width: 960px) {
   .portada { padding: 40px 0 64px; }
@@ -188,13 +188,13 @@ h2.antetitulo, h3.antetitulo { letter-spacing: .18em; }
   .portada-marco, .portada-foto::before { border-radius: 140px 140px var(--radio) var(--radio); }
   .portada-marco { aspect-ratio: 16 / 10; }
   .portada-marco img { object-position: 52% 50%; }
-  .portada-sello { left: 16px; bottom: 44px; }
+  .portada-sello { left: 16px; bottom: -26px; }
 }
 @media (max-width: 520px) {
   .portada-marco, .portada-foto::before { border-radius: 90px 90px var(--radio) var(--radio); }
   .portada-foto::before { inset: 12px -10px -12px 10px; }
   .portada-marco { aspect-ratio: 4 / 3; }
-  .portada-sello { left: 10px; right: 10px; bottom: 38px; max-width: none; }
+  .portada-sello { left: 10px; right: 28px; bottom: -30px; max-width: none; }
   .portada-bajada { font-size: 1.05rem; }
 }
 
@@ -670,3 +670,4 @@ tbody tr:last-child td { border-bottom: 0; }
 @media (max-width: 960px) { .nota-destacada-media:has(.sin-img) { aspect-ratio: 21 / 8; } }
 .pie .pie-suscripcion h2 { color: #fff; font: 700 1.5rem/1.2 var(--f-titulo); letter-spacing: -.01em; text-transform: none; margin: 0 0 10px; }
 @media (max-width: 420px) { .marca-dep { letter-spacing: .1em; } .marca-texto { max-width: 210px; } }
+.portada-figura { margin-bottom: 30px; }
