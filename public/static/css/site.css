@@ -120,9 +120,9 @@ h2.antetitulo, h3.antetitulo { letter-spacing: .18em; }
   .menu-btn[aria-expanded=true] .ico-cerrar { display: inline-flex; }
   /* Fila de secciones siempre visible, como en la maqueta */
   .nav-rapida { display: block; border-top: 1px solid rgba(255, 255, 255, .14); }
-  .nav-rapida ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; }
+  .nav-rapida ul { list-style: none; margin: 0; padding: 0 24px 0 0; display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
   .nav-rapida ul::-webkit-scrollbar { display: none; }
-  .nav-rapida a { display: block; padding: 11px 0 10px; color: #fff; text-decoration: none; font: 700 .7rem var(--f-titulo); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; border-bottom: 2px solid transparent; }
+  .nav-rapida a { display: block; padding: 11px 0 10px; color: #fff; text-decoration: none; font: 700 .68rem var(--f-titulo); letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; border-bottom: 2px solid transparent; }
   .nav-rapida a[aria-current] { border-bottom-color: var(--arena); }
   /* Menú completo desplegable */
   .nav { display: none; background: var(--marfil); border-top: 0; border-bottom: 1px solid var(--linea); }
@@ -181,7 +181,13 @@ h2.antetitulo, h3.antetitulo { letter-spacing: .18em; }
 .portada-foto::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(180deg, rgba(15, 44, 52, 0), rgba(15, 44, 52, .35)); pointer-events: none; }
 .portada-credito { position: absolute; left: 16px; bottom: 14px; z-index: 1; margin: 0; padding: 4px 12px; border-radius: 999px; background: rgba(15, 44, 52, .72); color: #fff; font-size: .74rem; }
 .portada-credito a { color: #fff; }
-@media (max-width: 640px) { .portada { padding: 40px 0 36px; } .portada-bajada { font-size: 1.04rem; } .portada-botones .btn { flex: 1 1 auto; } }
+@media (max-width: 640px) {
+  .portada { padding: 32px 0 30px; }
+  .portada h1 { font-size: 1.75rem; }
+  .portada-bajada { font-size: 1rem; }
+  .portada-botones { gap: 10px; margin-top: 22px; }
+  .portada-botones .btn-grande { min-height: 44px; padding: 10px 16px; font-size: .9rem; }
+}
 
 /* --------------------------------- Secciones --------------------------------- */
 .seccion { padding-top: 88px; padding-bottom: 88px; }

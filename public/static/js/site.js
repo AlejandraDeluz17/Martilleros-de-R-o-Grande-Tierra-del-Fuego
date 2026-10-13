@@ -175,3 +175,11 @@
     buscador.addEventListener('input', filtrar);
   }
 })();
+
+// En celulares, mostrar en la fila de secciones la sección actual
+(() => {
+  const actual = document.querySelector('.nav-rapida a[aria-current]');
+  if (actual && actual.parentElement.offsetLeft > actual.closest('ul').clientWidth * 0.6) {
+    actual.closest('ul').scrollLeft = actual.parentElement.offsetLeft - 24;
+  }
+})();
