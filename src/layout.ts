@@ -179,8 +179,8 @@ ${o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld).repl
     <a class="marca" href="/" aria-label="Inicio — Colegio de Martilleros y Corredores Públicos de Tierra del Fuego, ${DEPARTAMENTAL}">
       ${logo(o.cfg)}
       <span class="marca-texto">
-        <span class="marca-nombre">Colegio de Martilleros y Corredores Públicos</span>
-        <span class="marca-sub">Tierra del Fuego, Antártida e Islas del Atlántico Sur</span>
+        <span class="marca-nombre">Colegio de Martilleros y Corredores Públicos de Tierra del Fuego</span>
+        <span class="marca-sub">Antártida e Islas del Atlántico Sur</span>
         <span class="marca-dep">${DEPARTAMENTAL}</span>
       </span>
     </a>
