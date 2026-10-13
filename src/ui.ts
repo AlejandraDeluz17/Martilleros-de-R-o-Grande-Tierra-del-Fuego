@@ -31,6 +31,8 @@ const TRAZOS: Record<string, string> = {
   check: '<path d="m5 12 5 5 9-10"/>',
   edificio: '<path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6M9 11h.01M15 11h.01"/>',
   lista: '<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>',
+  institucion: '<path d="M3 20h18M4 17h16M12 3 3 8h18z"/><path d="M6 9v8M10 9v8M14 9v8M18 9v8"/>',
+  usuarios: '<circle cx="9" cy="8" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="m16 11 2 2 4-4"/>',
 };
 
 export const icono = (nombre: string, t = 20) =>

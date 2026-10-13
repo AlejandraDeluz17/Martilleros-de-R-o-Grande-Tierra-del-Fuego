@@ -20,9 +20,8 @@ export interface Pagina {
 type Sub = [titulo: string, href: string, detalle: string];
 type ItemMenu = { id: string; t: string; h: string; sub?: Sub[] };
 
-// Navegación principal: 7 entradas, con submenús para agrupar las 10 secciones
+// Navegación principal: 5 secciones (el logotipo lleva al inicio); los submenús agrupan las 10 secciones del sitio
 export const MENU: ItemMenu[] = [
-  { id: 'inicio', t: 'Inicio', h: '/' },
   { id: 'institucional', t: 'Institucional', h: '/institucional', sub: [
     ['Historia y misión', '/institucional#historia', 'Origen y propósito del Colegio'],
     ['Funciones', '/institucional#funciones', 'Qué hace el Colegio'],
@@ -32,14 +31,14 @@ export const MENU: ItemMenu[] = [
   { id: 'matriculados', t: 'Matriculados', h: '/matriculados', sub: [
     ['Padrón y consulta de matrícula', '/matriculados#padron', 'Verificá a un profesional'],
     ['Requisitos para matricularse', '/matriculados#requisitos', 'Título, documentación y pasos'],
+    ['Trámites y formularios', '/tramites', 'Procedimientos y documentación'],
     ['Servicios al matriculado', '/servicios', 'Beneficios, convenios y recursos'],
     ['Portal de autogestión', '/portal', 'Estado de cuenta y credencial'],
   ] },
-  { id: 'tramites', t: 'Trámites', h: '/tramites' },
   { id: 'normativa', t: 'Normativa', h: '/normativa' },
-  { id: 'actualidad', t: 'Actualidad', h: '/novedades', sub: [
-    ['Novedades', '/novedades', 'Noticias, comunicados y actividades'],
-    ['Capacitaciones', '/capacitaciones', 'Cursos, jornadas y eventos'],
+  { id: 'actualidad', t: 'Novedades', h: '/novedades', sub: [
+    ['Novedades y comunicados', '/novedades', 'Noticias, comunicados y actividades'],
+    ['Agenda de capacitaciones', '/capacitaciones', 'Cursos, jornadas y eventos'],
   ] },
   { id: 'contacto', t: 'Contacto', h: '/contacto', sub: [
     ['Contacto', '/contacto', 'Datos y formulario de consultas'],
@@ -52,7 +51,7 @@ const v = (ruta: string) => `${ruta}?v=${ENV.VERSION}`;
 export const logo = (cfg: Record<string, string>, clase = 'marca-logo') =>
   cfg.logo_id
     ? `<img class="${clase}" src="/archivos/${esc(cfg.logo_id)}" alt="" width="52" height="52">`
-    : `<span class="marca-sello" aria-hidden="true"><span>CM</span></span>`;
+    : `<span class="marca-sello" aria-hidden="true">${icono('institucion', 26)}</span>`;
 
 function nav(seccion?: string, ruta?: string) {
   return MENU.map((m) => {
@@ -112,7 +111,7 @@ function pie(cfg: Record<string, string>, conSuscripcion: boolean) {
   ${conSuscripcion ? `<div class="pie-banda"><div class="contenedor">${suscripcion()}</div></div>` : ''}
   <div class="contenedor pie-grid">
     <div class="pie-identidad">
-      <p class="pie-marca">${logo(cfg, 'marca-logo')}<span><span class="pie-nombre">Colegio de Martilleros y Corredores Públicos de Tierra del Fuego</span><span class="pie-dep">${DEPARTAMENTAL}</span></span></p>
+      <p class="pie-marca">${logo(cfg, 'marca-logo')}<span><span class="pie-nombre">Colegio de Martilleros y Corredores Públicos</span><span class="pie-dep">${DEPARTAMENTAL} · Tierra del Fuego</span></span></p>
       <p>Institución profesional creada por la ${enlaceExterno(LEY_762_URL, 'Ley Provincial 762')}. Acompaña a los profesionales matriculados y orienta a la comunidad.</p>
     </div>
     <div>
@@ -175,25 +174,36 @@ ${o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld).repl
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <header class="cabecera" id="cabecera">
-  <div class="contenedor cabecera-fila">
-    <a class="marca" href="/" aria-label="Inicio — Colegio de Martilleros y Corredores Públicos de Tierra del Fuego, ${DEPARTAMENTAL}">
-      ${logo(o.cfg)}
-      <span class="marca-texto">
-        <span class="marca-nombre">Colegio de Martilleros y Corredores Públicos de Tierra del Fuego</span>
-        <span class="marca-sub">Antártida e Islas del Atlántico Sur</span>
-        <span class="marca-dep">${DEPARTAMENTAL}</span>
-      </span>
-    </a>
-    <nav class="nav" id="menu-principal" aria-label="Principal">
+  <div class="cabecera-sup">
+    <div class="contenedor">
+      <a class="marca" href="/" aria-label="Inicio — Colegio de Martilleros y Corredores Públicos de Tierra del Fuego, ${DEPARTAMENTAL}">
+        ${logo(o.cfg)}
+        <span class="marca-texto">
+          <span class="marca-l1">Colegio de Martilleros</span>
+          <span class="marca-l2">y Corredores Públicos</span>
+          <span class="marca-l3">Tierra del Fuego · Río Grande</span>
+        </span>
+      </a>
+      <div class="cabecera-acciones">
+        <a class="enlace-sup" href="/portal">${icono('candado', 15)} Portal de matriculados</a>
+        <a class="btn btn-arena btn-matricula" href="/matriculados#padron">${icono('buscar', 17)}<span>Consultar matrícula</span></a>
+        <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu-principal"><span class="ico-abrir">${icono('menu', 22)}</span><span class="ico-cerrar">${icono('cerrar', 22)}</span><span class="sr menu-btn-txt">Menú</span></button>
+      </div>
+    </div>
+  </div>
+  <nav class="nav" id="menu-principal" aria-label="Principal">
+    <div class="contenedor">
       <ul class="nav-lista">${nav(o.seccion, o.ruta)}</ul>
       <div class="nav-extra">
+        <a href="/">${icono('institucion', 16)} Inicio</a>
         <a href="/portal">${icono('candado', 16)} Portal de matriculados</a>
         <a href="/denuncias">${icono('alerta', 16)} Consultas y denuncias</a>
       </div>
-    </nav>
-    <a class="btn btn-petroleo btn-matricula" href="/matriculados#padron">${icono('buscar', 17)}<span>Consultar matrícula</span></a>
-    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu-principal"><span class="ico-abrir">${icono('menu', 22)}</span><span class="ico-cerrar">${icono('cerrar', 22)}</span><span class="sr menu-btn-txt">Menú</span></button>
-  </div>
+    </div>
+  </nav>
+  <nav class="nav-rapida" aria-label="Secciones">
+    <div class="contenedor"><ul>${MENU.map((m) => `<li><a href="${m.h}"${m.id === o.seccion ? ' aria-current="true"' : ''}>${m.t}</a></li>`).join('')}</ul></div>
+  </nav>
 </header>
 <main id="contenido" tabindex="-1">
 ${o.cuerpo}

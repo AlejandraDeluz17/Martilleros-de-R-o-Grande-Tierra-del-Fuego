@@ -92,62 +92,39 @@ sitio.get('/', async (c) => {
   const [destacada, ...secundarias] = novedades;
 
   const foto = cfg.portada_id
-    ? `<img src="/archivos/${esc(cfg.portada_id)}" alt="${esc(cfg.portada_alt || 'Paisaje de Río Grande, Tierra del Fuego')}" width="1600" height="1000" fetchpriority="high">`
-    : `<img src="${FOTO_PORTADA.srcChica}" srcset="${FOTO_PORTADA.srcChica} 678w, ${FOTO_PORTADA.src} 1356w" sizes="(max-width: 960px) 100vw, 46vw" alt="${esc(FOTO_PORTADA.alt)}" width="${FOTO_PORTADA.ancho}" height="${FOTO_PORTADA.alto}" fetchpriority="high">`;
+    ? `<img src="/archivos/${esc(cfg.portada_id)}" alt="${esc(cfg.portada_alt || 'Vista de Río Grande, Tierra del Fuego')}" width="1600" height="900" fetchpriority="high">`
+    : `<img src="${FOTO_PORTADA.srcChica}" srcset="${FOTO_PORTADA.srcChica} 678w, ${FOTO_PORTADA.src} 1356w" sizes="100vw" alt="${esc(FOTO_PORTADA.alt)}" width="${FOTO_PORTADA.ancho}" height="${FOTO_PORTADA.alto}" fetchpriority="high">`;
   const creditoTexto = cfg.portada_id ? cfg.portada_credito : FOTO_PORTADA.credito;
-  const credito = creditoTexto ? `Foto: ${esc(creditoTexto)}` : '';
 
-  // A + B · Portada principal
+  // A + B · Presentación institucional y fotografía a todo el ancho
   const portada = `<section class="portada" aria-labelledby="portada-titulo">
-  <div class="contenedor portada-grid">
-    <div class="portada-texto">
-      <p class="antetitulo">${DEPARTAMENTAL} · Tierra del Fuego</p>
-      <h1 id="portada-titulo"><span>Una profesión responsable.</span> <span class="portada-titulo-2">Una comunidad mejor informada.</span></h1>
-      <p class="portada-bajada">Un espacio institucional dedicado al acompañamiento de los profesionales matriculados, la transparencia y la orientación a la ciudadanía.</p>
-      <div class="portada-botones">
-        <a class="btn btn-petroleo btn-grande" href="/matriculados#padron">${icono('buscar', 19)} Consultar matrícula</a>
-        <a class="btn btn-linea btn-grande" href="/institucional">Conocer el Colegio</a>
-      </div>
+  <div class="contenedor">
+    <p class="antetitulo">Institución · Río Grande</p>
+    <h1 id="portada-titulo">Una institución al servicio de la profesión y la comunidad.</h1>
+    <p class="portada-bajada">Información institucional, orientación al ciudadano y herramientas para nuestros matriculados.</p>
+    <div class="portada-botones">
+      <a class="btn btn-petroleo btn-grande" href="/matriculados#padron">Consultar matrícula ${icono('flecha', 18)}</a>
+      <a class="btn btn-arena-linea btn-grande" href="/institucional">Conocer el Colegio</a>
     </div>
-    <figure class="portada-figura">
-      <div class="portada-foto">
-        <div class="portada-marco">${foto}</div>
-        <div class="portada-sello" aria-hidden="true"><span class="sello-num">762</span><span class="sello-txt">Ley Provincial<br>de creación del Colegio</span></div>
-      </div>
-      ${credito ? `<figcaption class="portada-credito">${credito}</figcaption>` : ''}
-    </figure>
   </div>
-</section>`;
+</section>
+<figure class="portada-foto">
+  ${foto}
+  ${creditoTexto ? `<figcaption class="portada-credito">${esc(creditoTexto)}</figcaption>` : ''}
+</figure>`;
 
-  // C · Accesos de interés (composición editorial)
-  const accesos = `<section class="seccion accesos" aria-labelledby="accesos-titulo">
-  <div class="contenedor accesos-grid">
-    <div class="acceso-principal">
-      <p class="antetitulo antetitulo-claro">Consulta pública</p>
-      <h2 id="accesos-titulo">Consultar matrícula profesional</h2>
-      <p>Antes de firmar un contrato o entregar dinero, verificá que el martillero o corredor esté matriculado y habilitado.</p>
-      <form class="busqueda-matricula" action="/matriculados#padron" method="get" role="search" aria-label="Consultar matrícula">
-        <label for="inicio-q">Nombre, apellido o N.º de matrícula</label>
-        <div class="campo-boton"><input id="inicio-q" name="q" type="search" required minlength="2" autocomplete="off"><button class="btn btn-arena" type="submit">Buscar</button></div>
-      </form>
-      <a class="enlace-claro" href="/matriculados#padron">Ver el padrón completo ${icono('flecha', 16)}</a>
-    </div>
-    <div class="accesos-lista">
-      <h2 class="antetitulo">Accesos de interés</h2>
-      <ul>
-        ${[
-          ['carpeta', 'Trámites y requisitos', 'Inscripción en la matrícula, documentación y procedimientos ante la Departamental.', '/tramites'],
-          ['balanza', 'Normativa y documentación', 'Leyes, resoluciones y reglamentos que regulan la profesión.', '/normativa'],
-          ['maletin', 'Servicios al matriculado', 'Portal de autogestión, beneficios, convenios y recursos profesionales.', '/servicios'],
-        ].map(([ic, t, d, h], i) => `<li><a class="acceso-fila" href="${h}">
-          <span class="acceso-num" aria-hidden="true">0${i + 1}</span>
-          <span class="acceso-ico">${icono(ic, 22)}</span>
-          <span class="acceso-txt"><span class="acceso-t">${t}</span><span class="acceso-d">${d}</span></span>
-          <span class="acceso-flecha">${icono('flecha', 20)}</span>
-        </a></li>`).join('')}
-      </ul>
-      <p class="accesos-mas"><a href="/portal">${icono('candado', 16)} Portal de autogestión</a><a href="/capacitaciones">${icono('capacitacion', 16)} Capacitaciones</a><a href="/denuncias">${icono('alerta', 16)} Consultas y denuncias</a></p>
-    </div>
+  // C · Accesos de interés
+  const accesos = `<section class="accesos" aria-labelledby="accesos-titulo">
+  <div class="contenedor">
+    <h2 id="accesos-titulo">Accesos de interés</h2>
+    <ul class="accesos-grilla">
+      ${[
+        ['usuarios', 'Padrón profesional', 'Verificá si un martillero o corredor está matriculado.', '/matriculados#padron'],
+        ['balanza', 'Leyes y normativa', 'Ley 762, Ley 20.266 y documentación vigente.', '/normativa'],
+        ['carpeta', 'Trámites y formularios', 'Procedimientos, requisitos y formularios.', '/tramites'],
+        ['calendario', 'Agenda institucional', 'Capacitaciones, jornadas y eventos.', '/capacitaciones'],
+      ].map(([ic, t, d, h]) => `<li><a class="acceso" href="${h}">${icono(ic, 24)}<span class="acceso-nombre">${t}</span><span class="acceso-detalle">${d}</span></a></li>`).join('')}
+    </ul>
   </div>
 </section>`;
 
@@ -178,7 +155,7 @@ sitio.get('/', async (c) => {
   const actualidad = `<section class="seccion actualidad" aria-labelledby="actualidad-titulo">
   <div class="contenedor">
     <div class="fila-titulo">
-      ${tituloBloque({ antetitulo: 'Actualidad institucional', titulo: 'Novedades y comunicados', id: 'actualidad-titulo' })}
+      ${tituloBloque({ titulo: 'Actualidad institucional', bajada: 'Noticias, comunicados y capacitaciones de la Departamental Río Grande.', id: 'actualidad-titulo' })}
       <a class="btn btn-linea" href="/novedades">Todas las novedades ${icono('flecha', 16)}</a>
     </div>
     <div class="actualidad-grid">
@@ -188,25 +165,6 @@ sitio.get('/', async (c) => {
   </div>
 </section>`;
 
-  // E · Información para la comunidad
-  const comunidad = `<section class="seccion comunidad" aria-labelledby="comunidad-titulo">
-  <div class="contenedor comunidad-grid">
-    <div class="comunidad-intro">
-      <p class="antetitulo antetitulo-claro">Para la comunidad</p>
-      <h2 id="comunidad-titulo">Por qué consultar a un profesional matriculado</h2>
-      <p>Comprar, vender, alquilar o rematar un bien son decisiones importantes. El Colegio existe para que esas operaciones estén en manos de profesionales habilitados.</p>
-      <div class="comunidad-botones">
-        <a class="btn btn-arena" href="/matriculados#profesion">Martillero y corredor: diferencias</a>
-        <a class="enlace-claro" href="/denuncias">Consultas y denuncias ${icono('flecha', 16)}</a>
-      </div>
-    </div>
-    <ol class="comunidad-puntos">
-      <li><span class="punto-num" aria-hidden="true">01</span><div><h3>Qué hace el Colegio</h3><p>Controla la matrícula y el ejercicio profesional de martilleros y corredores públicos en la provincia, según la Ley Provincial 762.</p></div></li>
-      <li><span class="punto-num" aria-hidden="true">02</span><div><h3>Su función institucional</h3><p>Registra a los profesionales habilitados, publica el padrón y recibe las denuncias, que analizan el Tribunal de Disciplina y la Comisión Fiscalizadora.</p></div></li>
-      <li><span class="punto-num" aria-hidden="true">03</span><div><h3>Por qué importa</h3><p>Un profesional matriculado acredita título universitario habilitante y responde ante el Colegio por su actuación. Operar con personas sin matrícula genera riesgos, entre ellos tasaciones incorrectas.</p></div></li>
-    </ol>
-  </div>
-</section>`;
 
   const jsonld = {
     '@context': 'https://schema.org', '@type': 'Organization',
@@ -217,7 +175,7 @@ sitio.get('/', async (c) => {
     address: { '@type': 'PostalAddress', addressLocality: 'Río Grande', addressRegion: 'Tierra del Fuego', addressCountry: 'AR', ...(cfg.contacto_direccion ? { streetAddress: cfg.contacto_direccion } : {}) },
     parentOrganization: { '@type': 'Organization', name: 'Colegio de Martilleros y Corredores de Tierra del Fuego', url: SITIO_PROVINCIAL },
   };
-  return responder(c, cfg, { titulo: 'Inicio', ruta: '/', seccion: 'inicio', cuerpo: portada + accesos + actualidad + comunidad, jsonld });
+  return responder(c, cfg, { titulo: 'Inicio', ruta: '/', cuerpo: portada + accesos + actualidad, jsonld });
 });
 
 /* ------------------------------- Institucional ------------------------------- */
@@ -353,6 +311,22 @@ sitio.get('/matriculados', async (c) => {
   </div>
 </section>
 
+<section class="seccion comunidad" aria-labelledby="comunidad-titulo">
+  <div class="contenedor comunidad-grid">
+    <div class="comunidad-intro">
+      <p class="antetitulo antetitulo-claro">Para la comunidad</p>
+      <h2 id="comunidad-titulo">Por qué consultar a un profesional matriculado</h2>
+      <p>Comprar, vender, alquilar o rematar un bien son decisiones importantes. El Colegio existe para que esas operaciones estén en manos de profesionales habilitados.</p>
+      <div class="comunidad-botones"><a class="enlace-claro" href="/denuncias">Consultas y denuncias ${icono('flecha', 16)}</a></div>
+    </div>
+    <ol class="comunidad-puntos">
+      <li><span class="punto-num" aria-hidden="true">01</span><div><h3>Qué hace el Colegio</h3><p>Controla la matrícula y el ejercicio profesional de martilleros y corredores públicos en la provincia, según la Ley Provincial 762.</p></div></li>
+      <li><span class="punto-num" aria-hidden="true">02</span><div><h3>Su función institucional</h3><p>Registra a los profesionales habilitados, publica el padrón y recibe las denuncias, que analizan el Tribunal de Disciplina y la Comisión Fiscalizadora.</p></div></li>
+      <li><span class="punto-num" aria-hidden="true">03</span><div><h3>Por qué importa</h3><p>Un profesional matriculado acredita título universitario habilitante y responde ante el Colegio por su actuación. Operar con personas sin matrícula genera riesgos, entre ellos tasaciones incorrectas.</p></div></li>
+    </ol>
+  </div>
+</section>
+
 <section class="seccion seccion-blanca" aria-labelledby="profesion">
   <div class="contenedor">
     ${tituloBloque({ antetitulo: 'La profesión', titulo: 'Martillero y corredor no son lo mismo', id: 'profesion' })}
@@ -433,7 +407,7 @@ sitio.get('/tramites', async (c) => {
     </div>
   </div>
 </section>`;
-  return responder(c, cfg, { titulo: 'Trámites', descripcion: `Procedimientos, formularios y documentación para trámites ante la ${DEPARTAMENTAL}.`, ruta: '/tramites', seccion: 'tramites', cuerpo });
+  return responder(c, cfg, { titulo: 'Trámites', descripcion: `Procedimientos, formularios y documentación para trámites ante la ${DEPARTAMENTAL}.`, ruta: '/tramites', seccion: 'matriculados', cuerpo });
 });
 
 /* -------------------------------- Normativa -------------------------------- */
