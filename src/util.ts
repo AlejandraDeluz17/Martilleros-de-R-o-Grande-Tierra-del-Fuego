@@ -19,6 +19,17 @@ export const LEY_762_URL = 'http://www.legistdf.gob.ar/lp/leyes/Provinciales/LEY
 export const LEY_20266_URL = 'https://www.argentina.gob.ar/normativa/nacional/ley-20266-56724/actualizacion';
 export const CCYCN_URL = 'https://www.argentina.gob.ar/normativa/nacional/ley-26994-235975/texto';
 
+// Foto de portada por defecto (licencia libre; se reemplaza desde Administración → Contenidos → Imágenes)
+export const FOTO_PORTADA = {
+  src: '/static/img/portada-rio-grande.jpg',
+  srcChica: '/static/img/portada-rio-grande-960.jpg',
+  alt: 'Costanera de Río Grande al atardecer, con el mar a la izquierda y las luces de la ciudad en el horizonte',
+  autor: 'Soyyosoycocomiel',
+  licencia: 'CC BY-SA 4.0',
+  licenciaUrl: 'https://creativecommons.org/licenses/by-sa/4.0/deed.es',
+  fuente: 'https://commons.wikimedia.org/w/index.php?curid=63094400',
+};
+
 /* ------------------------------ Texto y HTML ------------------------------ */
 
 const ENT: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };

@@ -1,10 +1,11 @@
 import { esc, fecha, iso, urlNovedad, formatear } from './util';
 import { CATEGORIAS_NOVEDAD } from './db';
 
-// Íconos de trazo (24×24), siempre decorativos
+// Íconos de trazo fino (24×24), siempre decorativos
 const TRAZOS: Record<string, string> = {
   buscar: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   documento: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/>',
+  carpeta: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M8 13h8"/>',
   balanza: '<path d="M12 3v18M6 21h12M4 7h16"/><path d="M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0z"/>',
   capacitacion: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v6"/>',
   correo: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
@@ -29,37 +30,49 @@ const TRAZOS: Record<string, string> = {
   info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
   check: '<path d="m5 12 5 5 9-10"/>',
   edificio: '<path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6M9 11h.01M15 11h.01"/>',
+  lista: '<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>',
 };
 
 export const icono = (nombre: string, t = 20) =>
-  `<svg class="ico" width="${t}" height="${t}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${TRAZOS[nombre] ?? ''}</svg>`;
+  `<svg class="ico" width="${t}" height="${t}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${TRAZOS[nombre] ?? ''}</svg>`;
 
-const ICONO_CATEGORIA: Record<string, string> = {
+export const CATEGORIAS_CAPACITACION = ['curso', 'jornada', 'evento'];
+export const ICONO_CATEGORIA: Record<string, string> = {
   noticia: 'documento', comunicado: 'megafono', curso: 'capacitacion', jornada: 'capacitacion', reunion: 'red', evento: 'calendario',
 };
 
 export const PENDIENTE = 'Información pendiente de confirmación por la Departamental.';
-export const pendiente = (texto = PENDIENTE) => `<p class="pendiente">${icono('reloj', 18)}<span>${esc(texto)}</span></p>`;
+export const pendiente = (texto = PENDIENTE) =>
+  `<p class="pendiente">${icono('reloj', 18)}<span><strong>Pendiente de carga.</strong> ${esc(texto)}</span></p>`;
 export const contenido = (valor: string | undefined, textoPendiente?: string) =>
   valor?.trim() ? `<div class="prosa">${formatear(valor)}</div>` : pendiente(textoPendiente);
 
 export const enlaceExterno = (href: string, texto: string, clase = '') =>
   `<a href="${esc(href)}" target="_blank" rel="noopener"${clase ? ` class="${clase}"` : ''}>${esc(texto)} ${icono('externo', 14)}<span class="sr"> (se abre en una pestaña nueva)</span></a>`;
 
-export function encabezado(titulo: string, bajada: string, migas: [string, string?][]) {
-  const items = [['Inicio', '/'] as [string, string?], ...migas].map(([t, h], i, a) =>
+// Encabezado de páginas internas: claro, con migas, título, bajada y accesos "en esta página"
+export function encabezado(o: { titulo: string; bajada?: string; grupo?: string; migas: [string, string?][]; indice?: [string, string][] }) {
+  const items = [['Inicio', '/'] as [string, string?], ...o.migas].map(([t, h], i, a) =>
     i === a.length - 1 || !h ? `<li><span aria-current="page">${esc(t)}</span></li>` : `<li><a href="${h}">${esc(t)}</a></li>`).join('');
-  return `<section class="encabezado-pagina">
+  return `<header class="cabeza-pagina">
   <div class="contenedor">
     <nav class="migas" aria-label="Ruta de navegación"><ol>${items}</ol></nav>
-    <h1>${esc(titulo)}</h1>
-    ${bajada ? `<p>${esc(bajada)}</p>` : ''}
+    <div class="cabeza-pagina-grid">
+      <div>
+        ${o.grupo ? `<p class="antetitulo">${esc(o.grupo)}</p>` : ''}
+        <h1>${esc(o.titulo)}</h1>
+        ${o.bajada ? `<p class="bajada">${esc(o.bajada)}</p>` : ''}
+      </div>
+      ${o.indice?.length ? `<nav class="en-pagina" aria-label="En esta página"><p>En esta página</p><ul>${o.indice.map(([id, t]) => `<li><a href="#${id}">${esc(t)}</a></li>`).join('')}</ul></nav>` : ''}
+    </div>
   </div>
-</section>`;
+</header>`;
 }
 
-export const tituloSeccion = (titulo: string, bajada = '', id = '') =>
-  `<div class="titulo-seccion"><h2${id ? ` id="${id}"` : ''}>${esc(titulo)}</h2>${bajada ? `<p>${esc(bajada)}</p>` : ''}</div>`;
+export const tituloBloque = (o: { antetitulo?: string; titulo: string; bajada?: string; id?: string; nivel?: number }) => {
+  const n = o.nivel ?? 2;
+  return `<div class="titulo-bloque">${o.antetitulo ? `<p class="antetitulo">${esc(o.antetitulo)}</p>` : ''}<h${n}${o.id ? ` id="${o.id}"` : ''}>${esc(o.titulo)}</h${n}>${o.bajada ? `<p>${esc(o.bajada)}</p>` : ''}</div>`;
+};
 
 export const categoriaNovedad = (c: string | null) => CATEGORIAS_NOVEDAD[c ?? 'noticia'] ?? 'Noticia';
 
@@ -69,30 +82,34 @@ export function resumenNovedad(n: any, max = 180) {
   return t.length > max ? `${t.slice(0, max).replace(/\s+\S*$/, '')}…` : t;
 }
 
+export const fechaNovedad = (n: any) => `<time datetime="${iso(n.publicado_en)}">${fecha(n.publicado_en)}</time>`;
+export const leerMas = (n: any, texto = 'Leer más') =>
+  `<a class="leer-mas" href="${urlNovedad(n)}">${texto}<span class="sr">: ${esc(n.titulo)}</span> ${icono('flecha', 16)}</a>`;
+
+// Tarjeta de novedad para grillas (imagen opcional)
 export function tarjetaNovedad(n: any, nivel = 3) {
-  const url = urlNovedad(n);
   const media = n.imagen_id
-    ? `<img src="/archivos/${n.imagen_id}" alt="" loading="lazy" width="640" height="360">`
-    : `<span class="sin-img">${icono(ICONO_CATEGORIA[n.categoria ?? 'noticia'] ?? 'documento', 34)}</span>`;
-  return `<article class="tarjeta tarjeta-novedad">
-  <div class="tarjeta-novedad-media" aria-hidden="true">${media}</div>
-  <div class="tarjeta-cuerpo">
-    <p class="meta"><span class="etiqueta">${esc(categoriaNovedad(n.categoria))}</span><time datetime="${iso(n.publicado_en)}">${fecha(n.publicado_en)}</time></p>
-    <h${nivel}><a href="${url}" class="enlace-tarjeta">${esc(n.titulo)}</a></h${nivel}>
+    ? `<img src="/archivos/${n.imagen_id}" alt="" loading="lazy" width="640" height="400">`
+    : `<span class="sin-img">${icono(ICONO_CATEGORIA[n.categoria ?? 'noticia'] ?? 'documento', 30)}</span>`;
+  return `<article class="nota">
+  <div class="nota-media" aria-hidden="true">${media}</div>
+  <div class="nota-cuerpo">
+    <p class="meta"><span class="etiqueta">${esc(categoriaNovedad(n.categoria))}</span>${fechaNovedad(n)}</p>
+    <h${nivel}><a href="${urlNovedad(n)}" class="enlace-nota">${esc(n.titulo)}</a></h${nivel}>
     <p>${esc(resumenNovedad(n))}</p>
+    <span class="leer-mas" aria-hidden="true">Leer más ${icono('flecha', 16)}</span>
   </div>
 </article>`;
 }
 
-export const estado = (texto: string, tipo: 'ok' | 'err' | 'aviso' | 'neutro') => `<span class="estado estado-${tipo}">${esc(texto)}</span>`;
+// Bloque de fecha (día grande + mes) para agenda de capacitaciones
+export function bloqueFecha(d: unknown) {
+  const f = new Date(d as string);
+  const tz = { timeZone: 'America/Argentina/Ushuaia' } as const;
+  const dia = f.toLocaleDateString('es-AR', { ...tz, day: '2-digit' });
+  const mes = f.toLocaleDateString('es-AR', { ...tz, month: 'short' }).replace('.', '');
+  const anio = f.toLocaleDateString('es-AR', { ...tz, year: 'numeric' });
+  return `<time class="bloque-fecha" datetime="${iso(d)}"><span class="dia">${dia}</span><span class="mes">${esc(mes)}</span><span class="anio">${anio}</span></time>`;
+}
 
-// Ilustración de portada (se usa mientras no se cargue una foto oficial)
-export const ilustracionPortada = `<svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-<defs><linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E2537"/><stop offset="1" stop-color="#1E4466"/></linearGradient></defs>
-<rect width="1440" height="560" fill="url(#cielo)"/>
-<circle cx="1140" cy="250" r="74" fill="#B99A60" opacity=".2"/>
-<path d="M0 330C180 300 300 250 460 270S760 330 900 300 1200 230 1440 270V560H0Z" fill="#1A3D5C"/>
-<path d="M0 380C220 360 380 330 560 345S900 395 1100 370 1340 335 1440 345V560H0Z" fill="#15324B"/>
-<path d="M0 392H1440" stroke="#B99A60" stroke-opacity=".5" stroke-width="1.5"/>
-<g stroke="#fff" stroke-opacity=".07" stroke-width="2"><path d="M60 430H420M200 465H700M820 440H1300M980 490H1400M120 510H560"/></g>
-</svg>`;
+export const estado = (texto: string, tipo: 'ok' | 'err' | 'aviso' | 'neutro') => `<span class="estado estado-${tipo}">${esc(texto)}</span>`;

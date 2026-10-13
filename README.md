@@ -8,15 +8,21 @@ En producción: https://martilleros-rio-grande.up.railway.app
 
 | Ruta | Contenido |
 |---|---|
-| `/` | Portada: presentación, búsqueda de matrícula, accesos rápidos, comunicados destacados, novedades, servicios y suscripción |
-| `/institucional` | Historia, misión, objetivos, funciones, autoridades, comisiones y datos de la Departamental |
-| `/matriculados` | Padrón consultable, diferencias entre martillero y corredor, requisitos y trámites |
-| `/normativa` | Leyes, resoluciones, reglamentos, circulares, formularios y modelos de notas (con filtro y búsqueda) |
-| `/novedades` | Noticias, comunicados, cursos, jornadas, reuniones y eventos; `/novedades/<id>-<titulo>` abre cada nota |
+| `/` | Portada: presentación con foto de Río Grande, consulta de matrícula, accesos de interés, actualidad institucional (nota destacada + secundarias + próximas capacitaciones) e información para la comunidad |
+| `/institucional` | Historia, misión y objetivos, funciones, autoridades, comisiones y datos de la Departamental |
+| `/matriculados` | Padrón oficial y consulta de matrícula, diferencias entre martillero y corredor y requisitos |
+| `/tramites` | Procedimientos, formularios y modelos de notas para descargar y documentación |
+| `/normativa` | Leyes, resoluciones, reglamentos y demás documentos, con filtro por categoría y búsqueda |
+| `/novedades` | Noticias, comunicados y actividades; `/novedades/<id>-<titulo>` abre cada publicación |
+| `/capacitaciones` | Agenda de cursos, jornadas y eventos (próximos y realizados) |
 | `/servicios` | Portal de autogestión, pago online (pendiente), beneficios, convenios, consultas y recursos |
 | `/cofeci` | Presentación del Consejo Federal de Colegios Inmobiliarios y su sitio oficial |
 | `/contacto` | Datos confirmados y formulario de consultas (se guardan en la base) |
-| `/denuncias` | Explicación del trámite y derivación al formulario oficial del Colegio provincial |
+| `/denuncias` | Consultas y denuncias: derivación al formulario de contacto o al formulario oficial de denuncias |
+
+La suscripción a novedades (nombre, apellido y correo) está en el pie de todas las páginas.
+
+La foto de portada por defecto es "Costanera de Río Grande" de Soyyosoycocomiel ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=63094400)); se reemplaza desde Administración → Contenidos → Imágenes.
 | `/portal` | Portal de autogestión para matriculados |
 | `/admin` | Administración de contenidos |
 

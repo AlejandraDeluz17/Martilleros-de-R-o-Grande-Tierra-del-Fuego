@@ -5,6 +5,14 @@
   const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const normalizar = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
+  /* ------------------------- Sombra del encabezado fijo ------------------------- */
+  const cabecera = $('#cabecera');
+  if (cabecera) {
+    const sombra = () => cabecera.classList.toggle('con-sombra', window.scrollY > 8);
+    window.addEventListener('scroll', sombra, { passive: true });
+    sombra();
+  }
+
   /* ----------------------------- Menú principal ----------------------------- */
   const btnMenu = $('.menu-btn');
   const nav = $('#menu-principal');
@@ -141,7 +149,7 @@
   /* ---------------------------- Normativa: filtros ---------------------------- */
   const docs = $('#docs');
   if (docs) {
-    const chips = $$('.filtros-docs .chip');
+    const chips = $$('.filtros-vertical .filtro');
     const buscador = $('#docs-q');
     const info = $('#docs-info');
     const vacio = $('#docs-vacio');
@@ -154,6 +162,8 @@
         li.hidden = !ver;
         if (ver) n++;
       });
+      // Ocultar los grupos que quedaron sin documentos visibles
+      $$('.grupo-docs', docs).forEach((g) => { g.hidden = !$$('.doc', g).some((li) => !li.hidden); });
       info.textContent = `${n} documento${n === 1 ? '' : 's'}`;
       vacio.hidden = n > 0;
     };
